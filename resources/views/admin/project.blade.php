@@ -1,12 +1,12 @@
 @extends('layout.base')
 @section('title')
-Dashboard
+Project
 @endsection
 @section('content')
 <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
         <div class="x_title">
-            <h2 class="float-left">Data Daerah</h2>
+            <h2 class="float-left">Data Project</h2>
             <button id="create" class="btn btn-primary btn-sm float-right"><i class="fa fa-plus"></i> Tambah</button>
             <div class="clearfix"></div>
         </div>
@@ -18,8 +18,12 @@ Dashboard
                             <thead>
                                 <tr>
                                     <th style="width: 5%">No</th>
+                                    <th>Nama Project</th>
+                                    <th>Status</th>
+                                    <th>Alamat lengkap</th>
+                                    <th>Penanggung jawab</th>
                                     <th>Daerah</th>
-                                    <th>Aksi</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,7 +36,7 @@ Dashboard
         </div>
     </div>
 </div>
-@include('admin.modal.daerah_modal')
+@include('admin.modal.project_modal')
 @endsection
 
 @section('js')
@@ -51,7 +55,7 @@ Dashboard
         processing: true,
         serverSide: true,
         ajax: {
-            url:  '/Admin/Daerah',
+            url:  '/Admin/Project',
             type: 'GET'
         },
         columns: [{
@@ -59,8 +63,24 @@ Dashboard
                 name: 'DT_RowIndex',
             },
             {
-                data: 'name',
-                name: 'name',
+                data: 'project_name',
+                name: 'project_name',
+            },
+            {
+                data: 'status',
+                name: 'status',
+            },
+            {
+                data: 'address',
+                name: 'address',
+            },
+            {
+                data: 'user_name',
+                name: 'user_name',
+            },
+            {
+                data: 'daerah_name',
+                name: 'daerah_name',
             },
             {
                 data: 'action',
@@ -84,12 +104,15 @@ Dashboard
 
     $('body').on('click', '.editItem', function () {
         var Item_id = $(this).data('id');
-        $.get("/Admin/Daerah" + '/' + Item_id + '/edit', function (data) {
+        $.get("/Admin/Project" + '/' + Item_id + '/edit', function (data) {
             $('#modelheader').html("Edit Data");
             $('#simpan').val("edit-user");
             $('#univModal').modal('show');
             $('#id').val(data.id);
-            $('#name').val(data.name);
+            $('#project_name').val(data.project_name);
+            $('#address').val(data.address);
+            $('#id_daerah').val(data.id_daerah);
+            $('#id_user').val(data.id_user);
         })
     });
 
@@ -99,7 +122,7 @@ Dashboard
 
         $.ajax({
             data: $('#ItemForm').serialize(),
-            url: "/Admin/Daerah",
+            url: "/Admin/Project",
             type: "POST",
             dataType: 'json',
             success: function (data) {
@@ -145,7 +168,7 @@ function deleteConfirmation(id, name) {
 
             $.ajax({
                 type: 'POST',
-                url: "/Admin/Daerah/Destroy/" + id,
+                url: "/Admin/Project/Destroy/" + id,
                 data: {_token: CSRF_TOKEN},
                 dataType: 'JSON',
                 success: function (results) {

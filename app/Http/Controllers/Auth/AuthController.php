@@ -29,7 +29,12 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) 
         {
             $request->session()->put('name', Auth::user()->name);
-            return redirect()->route('dashboard');
+            if (Auth::user()->is_admin ==  true) {
+                return redirect()->route('dashboard');
+            }
+            else {
+                return redirect()->route('dashboard2');
+            }
         }
         else{
             return redirect()->route('login')->with('error', 'Username atau password salah !' );
