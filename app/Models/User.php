@@ -46,6 +46,6 @@ class User extends Authenticatable
 
     public function daerah_rol()
     {
-        return $this->belongsTo(Daerah::class, 'role');
+        return $this->belongsTo(Daerah::class, 'id_daerah');
     }
 }

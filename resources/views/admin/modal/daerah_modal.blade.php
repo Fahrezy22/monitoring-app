@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     <input type="hidden" name="id" id="id">
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Nama Dusun :</label>
+                        <label for="recipient-name" class="col-form-label">Daerah :</label>
                         <input type="text" name="name" class="form-control" id="name"
                             placeholder="Isi disini.." required>
                     </div>

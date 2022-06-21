@@ -57,6 +57,7 @@
               <div class="d-flex justify-content-center">
                 {!! htmlFormSnippet() !!}
               </div>
+              <div class="clearfix"></div>
               <div>
                 <button class="btn btn-default submit">Log in</button>
               </div>

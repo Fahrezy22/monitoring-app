@@ -7,7 +7,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="images/favicon.ico" type="image/ico" />
+    <link rel="icon" href="{{asset('template/production/images/favicon.ico')}}" type="image/ico" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     
 
     <title>MTR | @yield('title') </title>
@@ -51,7 +52,7 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    Admin
+                                    {{ Session::get('name') }}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
@@ -65,9 +66,7 @@
                 </div>
             </div>
             <div class="right_col" role="main">
-                <div class="row">
                     @yield('content')
-                </div>
             </div>
             <footer>
                 <div class="pull-right">
